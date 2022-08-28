@@ -75,7 +75,7 @@ static void* pta_openDll()
 {
     void* res = dlopen("libportaudio_x86.so", RTLD_LAZY);
 
-//	if (!res) res = dlopen("/Library/Frameworks/PortAudio.framework", RTLD_LAZY);
+	if (!res) res = dlopen("libportaudio.so", RTLD_LAZY);
 
 	return res;
 }

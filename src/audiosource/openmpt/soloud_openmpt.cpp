@@ -40,9 +40,9 @@ namespace SoLoud
 	OpenmptInstance::OpenmptInstance(Openmpt *aParent)
 	{
 		mParent = aParent;
-		mModfile = openmpt_module_create_from_memory((const void*)mParent->mData, mParent->mDataLen, NULL, NULL, NULL);		
+		mModfile = openmpt_module_create_from_memory((const void*)mParent->mData, mParent->mDataLen, NULL, NULL, NULL);
 		openmpt_module_set_repeat_count(mModfile, -1);
-		mPlaying = mModfile != NULL;		
+		mPlaying = mModfile != NULL;
 	}
 
 	unsigned int OpenmptInstance::getAudio(float *aBuffer, unsigned int aSamplesToRead, unsigned int aBufferSize)

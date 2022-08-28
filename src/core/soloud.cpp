@@ -225,7 +225,7 @@ namespace SoLoud
 
 #if defined(WITH_SDL1_STATIC)
 		if (!inited &&
-			(aBackend == Soloud::SDL1 || 
+			(aBackend == Soloud::SDL1 ||
 			aBackend == Soloud::AUTO))
 		{
 			if (aBufferSize == Soloud::AUTO) buffersize = 2048;
@@ -238,7 +238,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -282,7 +282,7 @@ namespace SoLoud
 
 #if defined(WITH_SDL1)
 		if (!inited &&
-			(aBackend == Soloud::SDL1 || 
+			(aBackend == Soloud::SDL1 ||
 			aBackend == Soloud::AUTO))
 		{
 			if (aBufferSize == Soloud::AUTO) buffersize = 2048;
@@ -295,7 +295,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -333,7 +333,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -352,7 +352,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -371,7 +371,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -391,7 +391,26 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
+		}
+#endif
+
+#if defined(WITH_JACK)
+		if (!inited &&
+			(aBackend == Soloud::JACK ||
+			aBackend == Soloud::AUTO))
+		{
+			if (aBufferSize == Soloud::AUTO) buffersize = 2048;
+	
+			int ret = jack_init(this, aFlags, samplerate, buffersize, aChannels);
+			if (ret == 0)
+			{
+				inited = 1;
+				mBackendID = Soloud::JACK;
+			}
+	
+			if (ret != 0 && aBackend != Soloud::AUTO)
+				return ret;
 		}
 #endif
 
@@ -410,26 +429,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
-		}
-#endif
-
-#if defined(WITH_JACK)
-		if (!inited &&
-			(aBackend == Soloud::JACK ||
-			aBackend == Soloud::AUTO))
-		{
-			if (aBufferSize == Soloud::AUTO) buffersize = 2048;
-
-			int ret = jack_init(this, aFlags, samplerate, buffersize, aChannels);
-			if (ret == 0)
-			{
-				inited = 1;
-				mBackendID = Soloud::JACK;
-			}
-
-			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -448,7 +448,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -467,7 +467,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -486,7 +486,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -505,7 +505,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -522,7 +522,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0 && aBackend != Soloud::AUTO)
-				return ret;			
+				return ret;
 		}
 #endif
 
@@ -545,7 +545,6 @@ namespace SoLoud
 		}
 #endif
 
-
 #if defined(WITH_NULL)
 		if (!inited &&
 			(aBackend == Soloud::NULLDRIVER))
@@ -560,7 +559,7 @@ namespace SoLoud
 			}
 
 			if (ret != 0)
-				return ret;			
+				return ret;
 		}
 #endif
 

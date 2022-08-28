@@ -141,11 +141,12 @@ set (BACKENDS_PATH ${SOURCE_PATH}/backend)
 set (BACKENDS_SOURCES)
 
 if (SOLOUD_BACKEND_NULL)
+	add_definitions(-DWITH_NULL)
+	
 	set (BACKENDS_SOURCES
 		${BACKENDS_SOURCES}
 		${BACKENDS_PATH}/null/soloud_null.cpp
 	)
-	add_definitions(-DWITH_NULL)
 endif()
 
 if (SOLOUD_BACKEND_SDL2)
@@ -165,18 +166,64 @@ if (SOLOUD_BACKEND_SDL2)
 
 endif()
 
-if (SOLOUD_BACKEND_ALSA)                     
-    add_definitions (-DWITH_ALSA)                
-                                           
-    set (BACKENDS_SOURCES              
-        ${BACKENDS_SOURCES} 
+if (SOLOUD_BACKEND_ALSA)
+    add_definitions (-DWITH_ALSA)
+
+    set (BACKENDS_SOURCES
+        ${BACKENDS_SOURCES}
         ${BACKENDS_PATH}/alsa/soloud_alsa.cpp
-    )                                              
+    )
 
     find_library (ALSA_LIBRARY asound)
     set (LINK_LIBRARIES
         ${LINK_LIBRARIES}
         ${ALSA_LIBRARY}
+    )
+endif()
+
+if (SOLOUD_BACKEND_OSS)
+    add_definitions (-DWITH_OSS)
+
+    set (BACKENDS_SOURCES
+        ${BACKENDS_SOURCES}
+        ${BACKENDS_PATH}/oss/soloud_oss.cpp
+    )
+
+#    find_library (OSS_LIBRARY oss)
+#    set (LINK_LIBRARIES
+#        ${LINK_LIBRARIES}
+#        ${OSS_LIBRARY}
+#    )
+endif()
+
+if (SOLOUD_BACKEND_PORTAUDIO)
+    add_definitions (-DWITH_PORTAUDIO)
+
+    set (BACKENDS_SOURCES
+        ${BACKENDS_SOURCES}
+        ${BACKENDS_PATH}/portaudio/soloud_portaudio.cpp
+        ${BACKENDS_PATH}/portaudio/soloud_portaudio_dll.c
+    )
+
+    find_library (PORTAUDIO_LIBRARY portaudio)
+    set (LINK_LIBRARIES
+        ${LINK_LIBRARIES}
+        ${PORTAUDIO_LIBRARY}
+    )
+endif()
+
+if (SOLOUD_BACKEND_JACK)
+    add_definitions (-DWITH_JACK)
+
+    set (BACKENDS_SOURCES
+        ${BACKENDS_SOURCES}
+        ${BACKENDS_PATH}/jack/soloud_jack.cpp
+    )
+
+    find_library (JACK_LIBRARY jack)
+    set (LINK_LIBRARIES
+        ${LINK_LIBRARIES}
+        ${JACK_LIBRARY}
     )
 endif()
 
@@ -241,6 +288,15 @@ if (SOLOUD_BACKEND_WASAPI)
 	set (BACKENDS_SOURCES
 		${BACKENDS_SOURCES}
 		${BACKENDS_PATH}/wasapi/soloud_wasapi.cpp
+	)
+endif()
+
+if (SOLOUD_BACKEND_NOSOUND)
+	add_definitions (-DWITH_NOSOUND)
+
+	set (BACKENDS_SOURCES
+		${BACKENDS_SOURCES}
+		${BACKENDS_PATH}/nosound/soloud_nosound.cpp
 	)
 endif()
 
