@@ -1,6 +1,6 @@
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 3.0)
 
-project (SoLoud)
+project (SoLoud VERSION 0 LANGUAGES C CXX)
 
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH}")
 set (CMAKE_POSITION_INDEPENDENT_CODE ON)
