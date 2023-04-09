@@ -34,6 +34,10 @@ freely, subject to the following restrictions:
 #include "soloud.h"
 #include "soloud_thread.h"
 
+namespace tracy {
+	void SetThreadName(const char* name);
+}
+
 namespace SoLoud
 {
 	namespace Thread
@@ -182,6 +186,7 @@ namespace SoLoud
 
 		static void * threadfunc(void * d)
 		{
+			tracy::SetThreadName("soloud");
 			soloud_thread_data *p = (soloud_thread_data *)d;
 			p->mFunc(p->mParam);
 			delete p;
